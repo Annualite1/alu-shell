@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "obase=8;ibase=5;$(echo $WATER | tr 'water' '01234') + $(echo $STIR | tr 'stir.' '01234')" | bc | tr '01234567' 'bestchol'
+printf '%o' $(( $(echo $WATER | tr 'water' '01234' | awk '{n=split($0,a,""); v=0; for(i=1;i<=n;i++) v=v*5+a[i]; print v}') + $(echo $STIR | tr 'stir.' '01234' | awk '{n=split($0,a,""); v=0; for(i=1;i<=n;i++) v=v*5+a[i]; print v}') )) | tr '01234567' 'bestchol'
